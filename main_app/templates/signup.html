@@ -1,3 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block head %}{% endblock head %}
+{% block content %}
+
+<div class="d-flex flex-row bd-highlight mb-3 justify-content-evenly">
+  <div class="" style="width: 30%">
+    <img 
+    src="{% static 'images/duck3.jpg' %}" 
+    width="100%"
+    alt=""
+    class="text-center"
+    >
+
+  </div>
+  <div class="p-2 bd-highlight">
+    <h3>Sign Up</h3>
+    <form action="">
+      username
+      <input type="text"></input><br />
+      password
+      <input type="text"></input><br />
+      confirm password
+      <input type="text"></input>
+    </form>
+  </div>
+</div>
+
+ {% endblock content %}
