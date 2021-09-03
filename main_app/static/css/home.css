@@ -2,4 +2,23 @@ body {
   background-image: url("../images/duck1.jpg");
   min-height: 100%;
   min-width: 100%;
+  background-size: cover;
+  /* background-repeat: no-repeat; */
 }
+
+main > section {
+  width: 100%;
+  padding: 20px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-direction: column;
+}
+
+.welcomeMessage {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+

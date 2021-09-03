@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+{% endblock head %}
+
+{% block content %}
+<div class="d-flex flex-column bd-highlight mb-3 justify-content-center"> 
+  <div class="p-5 text-center">
+    <img 
+    src="{% static 'images/duck2.jpg' %}" 
+    width="30%"
+    alt=""
+    >
+  </div>
+  <div class="text-center">
+    Welcome to readuck, a place where researchers across the world get together and share their thoughts.
+  </div>
+ </div>
+
+{% endblock content %}
