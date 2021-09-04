@@ -40,5 +40,10 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'signup.html', context)
 
-def login(request):
-  return render(request, 'login.html')
+def articles_index(request):
+  articles = Article.objects.all()
+  return render(request, 'articles/index.html', {'articles': articles})
+
+def articles_detail(request, article_id):
+  article = Article.objects.get(id=article_id)
+  return render(request, 'articles/detail.html', { 'article':article })

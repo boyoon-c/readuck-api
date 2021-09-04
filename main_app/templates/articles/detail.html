@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% comment %} <link 
+  rel="stylesheet" 
+  type="text/css" 
+  href="{% static 'css/cat-detail.css' %}"
+/> {% endcomment %}
+{% endblock %}
+
+{% block content %}
+
+<section class="">
+  <div class="">
+    <img 
+      src="{% static 'images/ducky.jpg' %}" 
+      alt="Smart duckie"
+    >
+  </div>
+  <div class="">
+    <h1>{{ article.title }}</h1>
+    <p>Author: {{ article.author }}</p>
+    <p>Citation: {{ article.citation }}</p>
+    <p>Published in: {{ article.journal }}</p>
+    <p>Uploaded by: {{ article.user }}</p>
+
+    <p>Abstract: {{ article.abstract }}</p>
+  </div>
+</section>
+
+{% endblock %}

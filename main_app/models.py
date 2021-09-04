@@ -12,13 +12,16 @@ class Article(models.Model):
   title = models.CharField(max_length=150)
   abstract = models.TextField(max_length=500)
   citation = models.IntegerField()
-  journalname=models.CharField(max_length=250)
+  journal=models.CharField(max_length=250)
+  year= models.IntegerField()
   ## user should be many-to-many
   user = models.ForeignKey(User, on_delete=models.CASCADE) 
   ## group should be many-to-many
 
   def __str__(self):
-    return self.name
+    return self.title
+
+
 
 '''
 # Group
