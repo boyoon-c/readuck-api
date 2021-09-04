@@ -22,10 +22,12 @@
     <h1>{{ article.title }}</h1>
     <p>Author: {{ article.author }}</p>
     <p>Citation: {{ article.citation }}</p>
+    <p>Year: {{ article.year }}</p>
     <p>Published in: {{ article.journal }}</p>
     <p>Uploaded by: {{ article.user }}</p>
-
     <p>Abstract: {{ article.abstract }}</p>
+      <a href="{% url 'articles_update' article.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'articles_delete' article.id %}" class="btn danger">Delete</a>
   </div>
 </section>
 

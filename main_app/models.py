@@ -25,7 +25,7 @@ class Article(models.Model):
     return self.title
 
   def get_absolute_url(self):
-    return reverse('articles_detail', kwargs={'article_id', self.id })
+    return reverse('articles_detail', kwargs={'article_id': self.id })
 
 '''
 # Group

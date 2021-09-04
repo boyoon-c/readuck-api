@@ -53,5 +53,11 @@ class ArticleCreate(CreateView):
   fields = '__all__'
   success_url='/articles/'
 
+class ArticleUpdate(UpdateView):
+  model = Article
+  fields = '__all__'
 
+class ArticleDelete(DeleteView):
+  model = Article
+  success_url = '/articles/'
 
