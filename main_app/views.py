@@ -47,3 +47,11 @@ def articles_index(request):
 def articles_detail(request, article_id):
   article = Article.objects.get(id=article_id)
   return render(request, 'articles/detail.html', { 'article':article })
+
+class ArticleCreate(CreateView):
+  model = Article
+  fields = '__all__'
+  success_url='/articles/'
+
+
+
