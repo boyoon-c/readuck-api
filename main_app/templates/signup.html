@@ -1,27 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block head %}{% endblock head %}
+{% block head %}
+<link rel="style sheet" type="text/css" href="{% static 'css/form.css' %}"/>
+{% endblock %}
+
 {% block content %}
 
-<div class="d-flex flex-row bd-highlight mb-3 justify-content-evenly">
-  <div class="p-5" style="width: 30%">
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_dkownj0k.json"  background="#ec900f"  speed="0.5"  style="width: 400px; height: 400px;"  loop  autoplay></lottie-player>
-
-
+<div class="container">
+  <div class="page-header">
+    <h1>Sign Up</h1>
   </div>
-  <div class="p-5 bd-highlight">
-    <h3>Sign Up</h3>
-    <form action="">
-      username
-      <input type="text"></input><br />
-      password
-      <input type="text"></input><br />
-      confirm password
-      <input type="text"></input>
-    </form>
-  </div>
+  {% if error_message %}
+    <p class="red-text">{{ error_message }}</p>
+  {% endif %}
+  <form action="" method="post" class="form-container" autocomplete="off">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <button type="submit" class="btn submit">Submit!</button>
+  </form>
 </div>
 
- {% endblock content %}
+ {% endblock %}
