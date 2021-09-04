@@ -3,16 +3,17 @@
 
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}"/>
-
 {% endblock head %}
 
 {% block content %}
-
+<div class="d-flex py-5 justify-content-center">
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets6.lottiefiles.com/packages/lf20_dkownj0k.json"  background="#DA2A6B"  speed="0.5"  style="width: 400px; height: 400px;"  loop  autoplay></lottie-player>
+</div>
 <section>
-  <div class="welcomeMessage">
+  <div class="d-flex justify-content-center">
     Welcome to readuck, a place where researchers across the world get together and share their thoughts
   </div>
-</section>
+  </section>
 
 {% endblock content %}
