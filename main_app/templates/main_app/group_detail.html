@@ -28,14 +28,5 @@
   <a href="{% url 'groups_update' group.id %}" class="btn warn">Edit</a>
   <a href="{% url 'groups_delete' group.id %}" class="btn danger">Delete</a>
 </div>
-{% comment %} <div class="card" style="border-color: {{ toy.color }}">
-  <div class="card-bg" style="background-color: {{ toy.color }}"></div>
-  <div class="card-content">
-    <h2>{{ toy.name }}</h2>
-    <p>A {{ toy.color }} toy</p>
-  </div>
-</div>
-<a href="{% url 'toys_update' toy.id %}" class="btn warn">Edit</a>
-<a href="{% url 'toys_delete' toy.id %}" class="btn danger">Delete</a> {% endcomment %}
 
 {% endblock %}

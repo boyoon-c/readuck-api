@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-
 # Article
 class Article(models.Model):
   author = models.CharField(max_length=250)
@@ -26,6 +25,22 @@ class Article(models.Model):
 
   def get_absolute_url(self):
     return reverse('articles_detail', kwargs={'article_id': self.id })
+
+# Reviews
+class Review(models.Model):
+  content = models.TextField(
+    max_length=500
+  )
+  user=models.ForeignKey(User, on_delete=models.CASCADE)
+  article = models.ForeignKey(Article, on_delete=models.CASCADE)
+
+# Comments
+class Comment(models.Model):
+  content = models.TextField(
+    max_length=500
+  )
+  user=models.ForeignKey(User, on_delete=models.CASCADE)
+  review = models.ForeignKey(Review, on_delete=models.CASCADE)
 
 # Group
 class Group(models.Model):
