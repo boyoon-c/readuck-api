@@ -5,21 +5,19 @@
 {% endblock %}
 
 {% block content %}
-<link rel="style sheet" type="text/css" href="{% static 'css/login.css' %}"/>
-  <div class="container">
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">  
+<div class="container">
     <div class="header">Sign Up</div>
-  <div>
   {% if error_message %}
     <p class="" style="color: red;">{{ error_message }}</p>
   {% endif %}
-  <form action="" method="post" class="" autocomplete="off">
+  <form action="" method="post" class="login" autocomplete="off">
     {% csrf_token %}
     <table>
       {{ form.as_table }}
     </table>
-    <button type="submit" class="btn submit">Submit!</button>
+    <button type="submit" class="btn submit">Submit</button>
   </form>
-  </div>
 </div>
 
  {% endblock %}
