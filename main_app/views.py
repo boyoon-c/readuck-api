@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Article, Group
+from .models import Article, Group, Review, Comment
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
@@ -46,7 +46,13 @@ def articles_index(request):
 
 def articles_detail(request, article_id):
   article = Article.objects.get(id=article_id)
-  return render(request, 'articles/detail.html', { 'article':article })
+  review = Review.objects.filter(article_id=article_id)
+  # comment = Comment.objects.filter()
+  return render(request, 'articles/detail.html', 
+  { 
+    'article':article,
+    'review': review 
+  })
 
 class ArticleCreate(CreateView):
   model = Article

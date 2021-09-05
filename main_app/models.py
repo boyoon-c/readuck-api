@@ -39,6 +39,7 @@ class Comment(models.Model):
   content = models.TextField(
     max_length=500
   )
+  article = models.ForeignKey(Article, on_delete=models.CASCADE)
   user=models.ForeignKey(User, on_delete=models.CASCADE)
   review = models.ForeignKey(Review, on_delete=models.CASCADE)
 
@@ -54,6 +55,10 @@ class Group(models.Model):
 
   def get_absolute_url(self):
     return reverse('groups_detail', kwargs={ "pk": self.id })
+
+class File(models.Model):
+  url = models.CharField(max_length=250)
+  article = models.OneToOneField(Article, on_delete=models.CASCADE)
 
 '''
 # Comment

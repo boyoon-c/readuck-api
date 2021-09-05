@@ -29,6 +29,11 @@
       <a href="{% url 'articles_update' article.id %}" class="btn warn">Edit</a>
       <a href="{% url 'articles_delete' article.id %}" class="btn danger">Delete</a>
   </div>
+  <div>
+    {% for rev in review %}
+      <div>Review by {{rev.user}}: {{rev.content}}</div>
+    {% endfor %}
+  </div>
   <embed src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf"   height="700px" width="500">
 
 </section>
