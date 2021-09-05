@@ -2,25 +2,24 @@
 {% load static %}
 
 {% block head %}
-<link rel="style sheet" type="text/css" href="{% static 'css/form.css' %}"/>
 {% endblock %}
 
 {% block content %}
-
-<div class="container">
-  <div class="page-header">
-    <h1>Sign Up</h1>
-  </div>
+<link rel="style sheet" type="text/css" href="{% static 'css/login.css' %}"/>
+  <div class="container">
+    <div class="header">Sign Up</div>
+  <div>
   {% if error_message %}
-    <p class="red-text">{{ error_message }}</p>
+    <p class="" style="color: red;">{{ error_message }}</p>
   {% endif %}
-  <form action="" method="post" class="form-container" autocomplete="off">
+  <form action="" method="post" class="" autocomplete="off">
     {% csrf_token %}
     <table>
       {{ form.as_table }}
     </table>
     <button type="submit" class="btn submit">Submit!</button>
   </form>
+  </div>
 </div>
 
  {% endblock %}

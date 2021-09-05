@@ -4,8 +4,7 @@
 {% block head %}{% endblock head %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
-<div class="d-flex flex-row bd-highlight mb-3 justify-content-evenly">
-  
+ 
   {% comment %} <div class="p-5 bd-highlight">
     <h3>Log In</h3>
     <form action="">
@@ -16,15 +15,15 @@
     </form>
   </div>
 </div> {% endcomment %}
-
-<section>
-  <form action="{% url 'login' %}" method="post" class="login">
-    <h1>Login</h1>
+<div class="container">
+  <div class="header">Login</div>
+  <div class="login">
+  <form action="{% url 'login' %}" method="post" class="">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="hidden" name="next" value="{{ next }}">
     <button type="submit" class="btn submit">Login</button>
   </form>
-</section>
-
+  </div>
+</div>
  {% endblock content %}

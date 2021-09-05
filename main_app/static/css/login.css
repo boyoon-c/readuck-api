@@ -1,3 +1,13 @@
+
+.container {
+  width: 100%;
+  padding: 80px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .logo-container {
   max-width: 450px;
 }
@@ -10,24 +20,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 40%;
 }
 
-.login h1 {
-  font-size: clamp(1.8rem, 3vw, 3rem);
-  margin: 10px 0 16px 0;
+.header {
+  background-color: #e3f2fe;
+  padding: 40px;
+  width: 40%;
+  justify-content: center;
+  text-align:center;
 }
 
-.login > p {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.login label {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-}
 
 .login input {
   font-size: 1.2rem;
@@ -43,11 +46,3 @@
   background-color: #fbda99;
 }
 
-section {
-  width: 40%;
-  padding: 80px 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
