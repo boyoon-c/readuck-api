@@ -22,32 +22,36 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'signup' %}">Sign Up</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Log In</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'articles_index' %}">All Articles</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'groups_index' %}">All Groups</a>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'articles_add' %}">Add an Article</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'groups_add' %}">Add a Group</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="">Log Out</a>
-        </li>
+
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'articles_index' %}">All Articles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'groups_index' %}">All Groups</a>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'articles_add' %}">Add an Article</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'groups_add' %}">Add a Group</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Log Out</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'signup' %}">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Log In</a>
+          </li>
+        {% endif %}
         
         
         
