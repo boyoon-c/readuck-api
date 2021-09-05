@@ -30,6 +30,7 @@ class Article(models.Model):
 # Group
 class Group(models.Model):
   name = models.CharField(max_length=150)
+  description = models.TextField(max_length=250)
   articles = models.ManyToManyField(Article, blank=True)
   participants = models.ManyToManyField(User)
   

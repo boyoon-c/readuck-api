@@ -6,20 +6,36 @@
 {% endblock %}
 
 {% block content %}
-<section>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 m-4">
   {% for group in group_list %}
-    <div>
-      <a href="/groups/{{group.id}}">
-        <div>
-          <div>
-            <img src="{% static 'images/ducky.jpg' %}" 
-            alt="Smart duckie">
-          </div>
-        </div>
-      </a>
-        <h2>{{ group.name }}</h2>
+  <div class="col">
+    <div class="card h-100">
+      <div class="text-center mt-3">
+        <a href="/articles/{{article.id}}" style="text-decoration:none; color:#ec900f;">
+
+          <img src="{% static 'images/ducky.jpg' %}" style="width: 40%;" class="card-img-top" alt="...">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title text-center">{{ group.name }}</h5>
+        </a>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Description: {{group.description}}</li>
+          <li class="list-group-item">Participants: 
+          {% for participant in group.participants.all%}
+          {{participant}}
+          {% endfor %}
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
     </div>
-  {% endfor %}
-</section>
+  </div>
+{% endfor %}
+
+
+
 
 {% endblock %}
