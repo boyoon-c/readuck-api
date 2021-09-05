@@ -6,25 +6,32 @@
 {% endblock %}
 
 {% block content %}
-<section>
-  {% for article in articles %}
-    <div>
-      <a href="/articles/{{article.id}}">
-        <div>
-          <div>
-            <img src="{% static 'images/ducky.jpg' %}" 
-            alt="Smart duckie">
-          </div>
-        </div>
-      </a>
 
-        <h2>{{ article.title }}</h2>
-        <p>Author: {{ article.author }}</p>
-        <p>Citation: {{ article.citation }}</p>
-        <p>Published in: {{ article.journal }}</p>
-        <p>Uploaded by: {{ article.user }}</p>
+<div class="row row-cols-1 row-cols-md-3 g-4 m-4">
+  {% for article in articles %}
+  <div class="col">
+    <div class="card h-100">
+      <div class="text-center mt-3">
+        <a href="/articles/{{article.id}}" style="text-decoration:none; color:#ec900f;">
+
+          <img src="{% static 'images/ducky.jpg' %}" style="width: 40%;" class="card-img-top" alt="...">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title text-center">{{ article.title }}</h5>
+        </a>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Author: {{ article.author }}</li>
+          <li class="list-group-item">Citation: {{ article.citation }}</li>
+          <li class="list-group-item">Journal: {{ article.journal }}</li>
+          <li class="list-group-item">Year: {{ article.year }}</li>
+          <li class="list-group-item">Added by: {{ article.user }}</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
     </div>
-  {% endfor %}
-</section>
+  </div>
+{% endfor %}
 
 {% endblock %}
