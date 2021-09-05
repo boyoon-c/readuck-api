@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import Article
+from .models import Article, Group
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
@@ -61,3 +61,20 @@ class ArticleDelete(DeleteView):
   model = Article
   success_url = '/articles/'
 
+class GroupList(ListView):
+  model = Group 
+
+class GroupCreate(CreateView):
+  model = Group
+  fields = '__all__'
+
+class GroupDetail(DetailView):
+  model = Group
+
+class GroupUpdate(UpdateView):
+  model = Group
+  fields = ['articles', 'participants']
+
+class GroupDelete(DeleteView):
+  model = Group
+  success_url='/groups/'

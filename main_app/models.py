@@ -20,21 +20,26 @@ class Article(models.Model):
   ## user should be many-to-many
   user = models.ForeignKey(User, on_delete=models.CASCADE) 
   ## group should be many-to-many
-
+  
   def __str__(self):
     return self.title
 
   def get_absolute_url(self):
     return reverse('articles_detail', kwargs={'article_id': self.id })
 
-'''
 # Group
 class Group(models.Model):
-  ## article many-to-many
-  article = models.ForeignKey(Article, on_delete=models.CASCADE)
-  ## user many-to-many
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  name = models.CharField(max_length=150)
+  articles = models.ManyToManyField(Article, blank=True)
+  participants = models.ManyToManyField(User)
+  
+  def __str__(self):
+    return self.name
 
+  def get_absolute_url(self):
+    return reverse('groups_detail', kwargs={ "pk": self.id })
+
+'''
 # Comment
 class Comment(models.Model):
   review=models.ForeignKey(Review,on_Delete=models.CASCADE)

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/article-index.css' %}"/> {% endcomment %}
+{% endblock %}
+
+{% block content %}
+<section>
+  {% for group in group_list %}
+    <div>
+      <a href="/groups/{{group.id}}">
+        <div>
+          <div>
+            <img src="{% static 'images/ducky.jpg' %}" 
+            alt="Smart duckie">
+          </div>
+        </div>
+      </a>
+        <h2>{{ group.name }}</h2>
+    </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
