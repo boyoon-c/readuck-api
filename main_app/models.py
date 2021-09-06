@@ -33,6 +33,12 @@ class Review(models.Model):
   )
   user=models.ForeignKey(User, on_delete=models.CASCADE)
   article = models.ForeignKey(Article, on_delete=models.CASCADE)
+  
+  def get_absolute_url(self):
+    # return reverse('articles_detail')
+  # def get_absolute_url(self):
+  #   print("self", self)
+    return reverse('articles_detail', kwargs={'article_id': self.article_id })
 
 # Reply
 class Reply(models.Model):
