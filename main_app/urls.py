@@ -17,5 +17,6 @@ urlpatterns = [
   path('groups/<int:pk>', views.GroupDetail.as_view(), name='groups_detail'),
   path('groups/<int:pk>/update/', views.GroupUpdate.as_view(), name='groups_update'),
   path('groups/<int:pk>/delete/', views.GroupDelete.as_view(), name='groups_delete'),
+  path('articles/<int:article_id>/add_reviews/', views.add_reviews, name='add_reviews'),
   # path('login/', views.login, name='login')
 ]

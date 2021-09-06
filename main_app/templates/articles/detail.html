@@ -30,12 +30,19 @@
       <a href="{% url 'articles_delete' article.id %}" class="btn danger">Delete</a>
   </div>
   <div>
-    {% for rev in review %}
-      <div>Review by {{rev.user}}: {{rev.content}}</div>
+    {% for review in reviews %}
+      <div>Review by {{review.user}}: {{review.content}}</div>
     {% endfor %}
   </div>
+  <form
+    action = "{% url 'add_reviews' article.id %}"
+    method = "post"
+    class="subsection-content">
+  {% csrf_token %}
+  {{ review_form.as_p}}
+  <button type="submit" class="btn submit">Add Review</button>
+  </form>
   <embed src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf"   height="700px" width="500">
-
 </section>
 
 {% endblock %}

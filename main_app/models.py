@@ -34,12 +34,11 @@ class Review(models.Model):
   user=models.ForeignKey(User, on_delete=models.CASCADE)
   article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
-# Comments
-class Comment(models.Model):
+# Reply
+class Reply(models.Model):
   content = models.TextField(
     max_length=500
   )
-  article = models.ForeignKey(Article, on_delete=models.CASCADE)
   user=models.ForeignKey(User, on_delete=models.CASCADE)
   review = models.ForeignKey(Review, on_delete=models.CASCADE)
 
