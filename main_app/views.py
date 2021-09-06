@@ -59,10 +59,12 @@ def articles_detail(request, article_id):
   })
 
 def add_reviews(request, article_id):
+  print("request.user", request.user)
   form = ReviewForm(request.POST)
   if form.is_valid():
     new_review=form.save(commit=False)
     new_review.article_id = article_id
+    new_review.user = request.user
     new_review.save()
   return redirect('articles_detail', article_id=article_id)
 
