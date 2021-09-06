@@ -114,12 +114,12 @@ class ReplyUpdate(UpdateView):
   model=Reply
   fields = ['content']
 
-# class ReplyDelete(DeleteView):
-#   model=Reply
+class ReplyDelete(DeleteView):
+  model=Reply
   
-#   def get_success_url(self):
-#     print('self', self.object.article_id)
-#     return reverse('articles_detail', kwargs={'article_id': self.object.article_id })
+  def get_success_url(self):
+    print('self', self.object.review.article_id)
+    return reverse('articles_detail', kwargs={'article_id': self.object.review.article_id })
 
 
 

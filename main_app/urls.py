@@ -20,7 +20,7 @@ urlpatterns = [
     # replies
   path('articles/<int:article_id>/<int:review_id>/add_comments/', views.add_replies, name='add_replies'),
   path('replies/<int:pk>/update/', views.ReplyUpdate.as_view(), name='update_replies'),
-  # path('replies/<int:pk>/delete/', views.ReplyDelete.as_view(), name='delete_replies'),
+  path('replies/<int:pk>/delete/', views.ReplyDelete.as_view(), name='delete_replies'),
 
 
   # groups
