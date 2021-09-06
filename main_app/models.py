@@ -49,6 +49,11 @@ class Reply(models.Model):
   user=models.ForeignKey(User, on_delete=models.CASCADE)
   review = models.ForeignKey(Review, on_delete=models.CASCADE)
 
+  def get_absolute_url(self):
+    # print(self.review.article_id)
+    # print('self', self.review_id)
+    return reverse('articles_detail', kwargs={ 'article_id': self.review.article_id})
+
 # Group
 class Group(models.Model):
   name = models.CharField(max_length=150)

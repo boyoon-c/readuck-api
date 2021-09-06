@@ -17,11 +17,10 @@ urlpatterns = [
   path('reviews/<int:pk>/update/', views.ReviewUpdate.as_view(), name='update_reviews'),
   path('reviews/<int:pk>/delete/', views.ReviewDelete.as_view(), name='delete_reviews'),
   
-  
-
-  # replies
+    # replies
   path('articles/<int:article_id>/<int:review_id>/add_comments/', views.add_replies, name='add_replies'),
-
+  path('replies/<int:pk>/update/', views.ReplyUpdate.as_view(), name='update_replies'),
+  # path('replies/<int:pk>/delete/', views.ReplyDelete.as_view(), name='delete_replies'),
 
 
   # groups
