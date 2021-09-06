@@ -7,10 +7,11 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import ReviewForm
+from .forms import *
 from main_app import models
 import uuid
 import boto3
+import pandas as pd
 
 # Create your views here.
 '''
@@ -48,14 +49,27 @@ def articles_index(request):
 def articles_detail(request, article_id):
   article = Article.objects.get(id=article_id)
   reviews = Review.objects.filter(article_id=article_id)
+  print('Filtered reviews', reviews)
+  # replies = Reply.objects.all()
+  # Get all replies for reviews that correspond to an article
+  reviews_id=[]
+  for review in reviews:
+    reviews_id.append(review.id)
+
+  print(reviews_id)
+  replies = Reply.objects.filter(review_id__in=reviews_id)
+  print('replies', replies)
+  # replies = Reply.objects.filter(review_id=review_id)
   review_form = ReviewForm()
+  reply_form = ReplyForm()
   # replies = Reply.objects.filter(review_id=review_id)
   return render(request, 'articles/detail.html', 
   { 
     'article': article,
     'reviews': reviews,
-    'review_form': review_form
-    # 'replies': replies
+    'review_form': review_form,
+    'reply_form': reply_form,
+    'replies': replies
   })
 
 def add_reviews(request, article_id):
@@ -68,8 +82,17 @@ def add_reviews(request, article_id):
     new_review.save()
   return redirect('articles_detail', article_id=article_id)
 
-def add_replies(request, comment_id):
-  pass
+def add_replies(request, article_id, review_id):
+  form = ReplyForm(request.POST)
+  if form.is_valid():
+    new_reply=form.save(commit=False)
+    new_reply.review_id=review_id
+    new_reply.user = request.user
+    new_reply.article_id=article_id
+    new_reply.save()
+  return redirect('articles_detail', article_id=article_id)
+
+
 
 class ArticleCreate(CreateView):
   model = Article

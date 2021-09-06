@@ -18,6 +18,7 @@
       alt="Smart duckie"
     >
   </div>
+
   <div class="">
     <h1>{{ article.title }}</h1>
     <p>Author: {{ article.author }}</p>
@@ -29,30 +30,45 @@
       <a href="{% url 'articles_update' article.id %}" class="btn warn">Edit</a>
       <a href="{% url 'articles_delete' article.id %}" class="btn danger">Delete</a>
   </div>
+
   <div>
     {% for review in reviews %}
-      <div>Review by {{review.user}}: {{review.content}}
+      <div>
+        Review by {{review.user}}: {{review.content}}
       </div>
+    
+      {% for reply in replies %}
+        {% if reply.review_id == review.id %}
+          Reply by {{reply.user}} for {{review.content}}: {{reply.content}}
+        {% endif %} 
+      {% endfor %} 
+      
     <form 
-      action = "{% url 'add_replies' review.id %}"
+      action = "{% url 'add_replies' article.id review.id %}"
       method="post"
       class="subsection-content">
+    <label for="">Add a reply</label>
     {% csrf_token %}
     {{ reply_form.as_p }}
     <button type="submit" class="btn submit">Add Reply</button>
     </form> 
     {% endfor %}
-
+ 
+    
+    <div>Section for Review
+    <form
+      action = "{% url 'add_reviews' article.id %}"
+      method = "post"
+      class="subsection-content">
+      {% csrf_token %}
+      {{ review_form.as_p}}
+      <button type="submit" class="btn submit">Add Review</button>
+    </form>
+    </div>
   </div>
-  <form
-    action = "{% url 'add_reviews' article.id %}"
-    method = "post"
-    class="subsection-content">
-  {% csrf_token %}
-  {{ review_form.as_p}}
-  <button type="submit" class="btn submit">Add Review</button>
-  </form>
-  <embed src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf"   height="700px" width="500">
-</section>
 
+  
+  <embed src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf"   height="700px" width="500">
+
+</section>
 {% endblock %}
