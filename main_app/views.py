@@ -68,6 +68,9 @@ def add_reviews(request, article_id):
     new_review.save()
   return redirect('articles_detail', article_id=article_id)
 
+def add_replies(request, comment_id):
+  pass
+
 class ArticleCreate(CreateView):
   model = Article
   fields = '__all__'
