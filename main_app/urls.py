@@ -15,6 +15,8 @@ urlpatterns = [
   # reviews
   path('articles/<int:article_id>/add_reviews/', views.add_reviews, name='add_reviews'),
   path('reviews/<int:pk>/update/', views.ReviewUpdate.as_view(), name='update_reviews'),
+  path('reviews/<int:pk>/delete/', views.ReviewDelete.as_view(), name='delete_reviews'),
+  
   
 
   # replies
@@ -22,6 +24,7 @@ urlpatterns = [
 
 
 
+  # groups
   path('groups/', views.GroupList.as_view(), name='groups_index'),
   path('groups/add', views.GroupCreate.as_view(), name='groups_add'),
   path('groups/<int:pk>', views.GroupDetail.as_view(), name='groups_detail'),

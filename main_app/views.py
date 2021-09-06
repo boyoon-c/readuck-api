@@ -1,6 +1,9 @@
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy, reverse
 from .models import Article, Group, Review, Reply
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, DeletionMixin
+from django.views import View
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
@@ -87,7 +90,29 @@ def add_replies(request, article_id, review_id):
 
 class ReviewUpdate(UpdateView):
   model=Review
-  fields = '__all__'
+  fields = ['content']
+
+# class ReviewDelete(DeletionMixin, View):
+#   # model=Review
+#   # success_url='/articles/{article_id}'
+#   # success_url=reverse_lazy('articles_detail')
+#   def delete(self, request):
+#     print("self", self)
+#     success_url=self.get_success_url()
+#     self.object=self.get_object()
+#     self.object.delete()
+#     return HttpResponseRedirect(success_url)
+#   def get_success_url(self):
+#      return reverse_lazy('articles_detail', kwargs={'article_id': self.article_id })
+
+class ReviewDelete(DeleteView):
+  model=Review
+  
+  def get_success_url(self):
+    print('self', self.object.article_id)
+    return reverse('articles_detail', kwargs={'article_id': self.object.article_id })
+
+
 
 class ArticleCreate(CreateView):
   model = Article

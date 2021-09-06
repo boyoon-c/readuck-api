@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from datetime import date
 from django.contrib.auth.models import User
 
@@ -25,6 +25,8 @@ class Article(models.Model):
 
   def get_absolute_url(self):
     return reverse('articles_detail', kwargs={'article_id': self.id })
+  
+  
 
 # Reviews
 class Review(models.Model):
@@ -35,10 +37,9 @@ class Review(models.Model):
   article = models.ForeignKey(Article, on_delete=models.CASCADE)
   
   def get_absolute_url(self):
-    # return reverse('articles_detail')
-  # def get_absolute_url(self):
-  #   print("self", self)
     return reverse('articles_detail', kwargs={'article_id': self.article_id })
+  
+  
 
 # Reply
 class Reply(models.Model):
