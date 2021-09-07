@@ -1,7 +1,7 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy, reverse
-from .models import Article, Group, Review, Reply
+from .models import Article, Group, GroupArticle, Review, Reply
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views import View
 from django.views.generic import ListView, DetailView
@@ -148,10 +148,27 @@ class GroupCreate(CreateView):
 class GroupDetail(DetailView):
   model = Group
 
+  def get_context_data(self, **kwargs):
+    # Call the base implementation first to get a context
+    context = super().get_context_data(**kwargs)
+    # Add in a QuerySet of all the books
+    context['group_article_list'] = GroupArticle.objects.filter(group_id=self.object.id)
+    print('context', context['group_article_list'])
+    return context
+
 class GroupUpdate(UpdateView):
   model = Group
-  fields = ['articles', 'participants']
+  fields = ['name','description', 'participants']
 
 class GroupDelete(DeleteView):
   model = Group
   success_url='/groups/'
+
+class GroupArticleCreate(CreateView):
+  model = GroupArticle
+  fields='__all__'
+
+  def get_success_url(self):
+    print('self', self.object.group_id)
+    return reverse('groups_detail', kwargs={'pk': self.object.group_id })
+

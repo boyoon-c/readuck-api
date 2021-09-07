@@ -58,7 +58,7 @@ class Reply(models.Model):
 class Group(models.Model):
   name = models.CharField(max_length=150)
   description = models.TextField(max_length=250)
-  articles = models.ManyToManyField(Article, blank=True)
+  # articles = models.ManyToManyField(Article, blank=True)
   participants = models.ManyToManyField(User)
   
   def __str__(self):
@@ -66,6 +66,26 @@ class Group(models.Model):
 
   def get_absolute_url(self):
     return reverse('groups_detail', kwargs={ "pk": self.id })
+
+# Group Articles
+class GroupArticle(models.Model):
+  author = models.CharField(max_length=250)
+  title = models.CharField(max_length=150)
+  abstract = models.TextField(
+    max_length=500,
+    null=True,
+    blank=True)
+  citation = models.IntegerField()
+  journal=models.CharField(max_length=250)
+  year= models.IntegerField()
+  user = models.ForeignKey(User, on_delete=models.CASCADE) 
+  group = models.ForeignKey(Group, on_delete=models.CASCADE)
+
+# def get_absolute_url(self):
+#   print('self.id', self.id)
+#   return reverse('groups_detail', kwargs={'pk': self.group_id })
+
+
 
 class File(models.Model):
   url = models.CharField(max_length=250)

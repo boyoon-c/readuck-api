@@ -13,12 +13,17 @@
   
 <div>
   <p>Group Name: {{ group.name }}</p>
-  <p>
+  <p>Group Description: {{ group.description }}</p>
+  {% comment %} <p>
   Articles: 
     {% for article in group.articles.all %}
     <a href="{% url 'articles_detail' article.id %}">{{article}}</a>
     {% endfor%}
-  </p>
+  </p> {% endcomment %}
+  {% for article in group_article_list %}
+    <p>{{article.title}}</p>
+  {% endfor %}
+
   <p>
   Participants: 
     {% for participant in group.participants.all %}
@@ -27,6 +32,7 @@
   </p>
   <a href="{% url 'groups_update' group.id %}" class="btn warn">Edit</a>
   <a href="{% url 'groups_delete' group.id %}" class="btn danger">Delete</a>
+  <a href="{% url 'add_group_articles' group.id %}" class="btn danger">Add an article</a>
 </div>
 
 {% endblock %}
