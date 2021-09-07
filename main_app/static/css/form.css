@@ -2,6 +2,10 @@ main {
   padding: 50px;
 }
 
+.page-header{
+  text-align: center;
+}
+
 .container {
   display: flex;
   width: 100%;
@@ -12,7 +16,6 @@ main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 50px;
   justify-content: center;
 
 }
@@ -47,6 +50,7 @@ td > textarea {
 }
 
 .btn {
-  align-self: flex-end;
-  margin-right: 40px;
+  background-color: #e3f2fe;
+  align-self: flex-center;
+  margin-top: 20px;
 }

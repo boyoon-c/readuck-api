@@ -4,8 +4,19 @@
 {% block head %}{% endblock head %}
 
 {% block content %}
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
+
+<div class="page-header">
+<h3 class="mb-4">Add an Article </h3>
+</div>
+<form method="post" class="form-container" autocomplete="off">
+	{% csrf_token %}
+	<table>
+	{{ form.as_table }}
+	</table>
+	{% comment %} <input type="submit" value="Save"> {% endcomment %}
+  <button type="submit" class="btn">Save</button>
 </form>
+</div>
+
 {% endblock content %}
