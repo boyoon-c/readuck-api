@@ -42,11 +42,11 @@
   </div>
   <div class="collapse mb-5" id="collapseExample">
     <div class="card card-body">
-      <div class="row m-4 card border-secondary">
+      <div class="row m-4 card" style="border: #e2e2e2 solid 2px;">
         <div class="bg-light">
         <h3 class="fs-5 m-4 text-center">Leave a Review</h3>
         </div>
-        <div class="col">
+        <div class="col mt-4">
           <form
             action = "{% url 'add_reviews' article.id %}"
             method = "post"
@@ -56,7 +56,9 @@
             {{ review_form.as_table}}
             </table>
         </div>
+            <div class="container justify-content-center mb-4">
               <button type="submit" class="btn text-center">Add Review</button>
+            </div>
           </form>
       </div>
     </div>
@@ -70,7 +72,7 @@
       </div>
 
       <div class="col g-3">
-        {% for review in reviews %}
+      {% for review in reviews %}
         <div class="card mb-3">
           <div class="m-4">
           Review by {{review.user}}: {{review.content}}
@@ -79,25 +81,77 @@
           {% if user.id == review.user_id %}
             <a href="{% url 'update_reviews' review.id %}" class="btn m-1">Edit</a>
             <a href="{% url 'delete_reviews' review.id %}" class="btn m-1">Delete</a> 
+          {% endif %}
             <a class="btn m-1" data-bs-toggle="collapse" href="#multi{{ review.id }}" role="button" aria-expanded="false" aria-controls="multi{{ review.id }}"> Replies </a>
           </div>
-          {% endif %}
 
-
-
+          {% comment %} 
+            How to handle if there are no replies yet
+          {% endcomment %}
+          {% comment %} {% if not replies %}
+            <div class="collapse multi-collapse mb-5" id="multi{{ review.id }}">
+              <form 
+                action = "{% url 'add_replies' article.id review.id %}"
+                method="post"
+                class="subsection-content">
+                <label for="">Add a reply</label>
+                {% csrf_token %}
+                {{ reply_form.as_p }}
+                <button type="submit" class="btn">Add Reply</button>
+              </form> 
+            </div>
+          {% endif %} {% endcomment %}
 
           {% for reply in replies %}
+            
             {% if reply.review_id == review.id %}
+              
               <div>
-                <div class="collapse multi-collapse mb-5" id="multi{{reply.review_id}}">
+                <div class="collapse multi-collapse mb-5" id="multi{{ review.id }}">
                   <div class="card m-4 card-body">
+                      Reply by {{reply.user}} for {{review.content}}: {{reply.content}} <br/>
                     {% if user.id == reply.user_id %}
                       <div>
-                      Reply by {{reply.user}} for {{review.content}}: {{reply.content}} <br/>
                       <a href="{% url 'update_replies' reply.id %}" class="btn">Edit</a>
                       <a href="{% url 'delete_replies' reply.id %}" class="btn">Delete</a>
                       </div>
-                    {% else %}
+                    {% endif %}
+                    </div>
+                </div>
+              </div>
+            {% endif %} 
+          {% endfor %}
+          <div class="row m-4 card collapse multi-collapse mb-5" id="multi{{ review.id }}" style="border: #e2e2e2 solid 2px;">
+            <div class="bg-light">
+              <h3 class="fs-5 m-4 text-center">Add a reply</h3>
+            </div>
+            <div class="d-flex mt-4 py-4 align-items-center">
+              <form
+                action = "{% url 'add_replies' article.id review.id %}"
+                method = "post"
+                class="collapse multi-collapse mb-5" id="multi{{ review.id }}">
+                {% csrf_token %}
+                <table class="justify-self-center">
+                {{ reply_form.as_table}}
+                </table>
+            </div>
+                <div class="container justify-content-center mb-5">
+                  <button type="submit" class="btn text-center">Add Review</button>
+                </div>
+              </form>
+          </div>
+{% comment %}  
+                  <form 
+                        action = "{% url 'add_replies' article.id review.id %}"
+                        method="post"
+                        class="collapse multi-collapse mb-5" id="multi{{ review.id }}">
+                        <label for="">Add a reply</label>
+                        {% csrf_token %}
+                        {{ reply_form.as_table }}
+                        <button type="submit" class="btn">Add Reply</button>
+                  </form> {% endcomment %}
+                    {% comment %} {% else %}
+                      
                       <form 
                         action = "{% url 'add_replies' article.id review.id %}"
                         method="post"
@@ -106,13 +160,11 @@
                         {% csrf_token %}
                         {{ reply_form.as_p }}
                         <button type="submit" class="btn">Add Reply</button>
-                      </form> 
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            {% endif %} 
-          {% endfor %} 
+                      </form>  {% endcomment %}
+                      
+                    
+                  
+            
         
           {% comment %} <form 
             action = "{% url 'add_replies' article.id review.id %}"
@@ -124,7 +176,7 @@
             <button type="submit" class="btn">Add Reply</button>
           </form>  {% endcomment %}
         </div>
-        {% endfor %}
+      {% endfor %}
       </div>
     </div>
   </div>
