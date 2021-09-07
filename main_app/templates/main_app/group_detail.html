@@ -22,6 +22,7 @@
   </p> {% endcomment %}
   {% for article in group_article_list %}
     <p>{{article.title}}</p>
+    <a href="{% url 'delete_group_articles' article.id %}" class="btn danger">Delete</a>
   {% endfor %}
 
   <p>

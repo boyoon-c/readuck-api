@@ -167,25 +167,15 @@ class GroupDelete(DeleteView):
 class GroupArticleCreate(CreateView):
   model = GroupArticle
   fields=['author', 'title', 'abstract', 'citation', 'journal', 'year']
-  # fields = '__all__'
 
   def get_success_url(self):
     print('self', self.object.group_id)
     return reverse('groups_detail', kwargs={'pk': self.object.group_id })
 
   def form_valid(self, form):
-    # print('self and request group_id', self.request.group)
-    # print('self and object', self.object.pk)
-    # print('self.request.user', self.request.get(url=URL))
-
-    # print('kwargs', self.pk)
     form.instance.user = self.request.user
     form.instance.group_id = self.kwargs['pk']
-    #form.instance.group = self.kwargs
     print('kwargs', self.kwargs['pk'])
-    # form.instance.group = super().form_valid(form).url.split('/')[2]
-    # print('response', response.url.split('/')[2])
-    # form.instance.group= response.url.split('/')[2]
     response=super().form_valid(form)
     return response
 
@@ -193,3 +183,9 @@ class GroupArticleCreate(CreateView):
 class GroupArticleUpdate(UpdateView):
   model = GroupArticle
   fields=['']
+
+class GroupArticleDelete(DeleteView):
+  model = GroupArticle
+
+  def get_success_url(self):
+    return reverse('groups_detail', kwargs={'pk': self.object.group_id })
