@@ -8,9 +8,9 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
 <div class="page-header">
   {% if object %}
-    <h1>Edit {{object.name}}</h1>
+    <h3>Edit {{object.name}}</h3>
   {% else %}
-    <h1>Add a Group</h1>
+    <h3 class="mb-4">Add a Group</h4>
   {% endif %}
 </div>
 <form action="" method="post" class="form-container" autocomplete="off">
