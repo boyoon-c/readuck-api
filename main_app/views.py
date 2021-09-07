@@ -49,6 +49,7 @@ def articles_index(request):
   articles = Article.objects.all()
   return render(request, 'articles/index.html', {'articles': articles})
 
+@login_required
 def articles_detail(request, article_id):
   article = Article.objects.get(id=article_id)
   reviews = Review.objects.filter(article_id=article_id)
@@ -99,7 +100,7 @@ class ReviewDelete(DeleteView):
     print('self', self.object.article_id)
     return reverse('articles_detail', kwargs={'article_id': self.object.article_id })
 
-class ReviewUpdate(UpdateView):
+class ReviewUpdate(LoginRequiredMixin, UpdateView):
   model=Review
   fields = ['content']
 
@@ -110,7 +111,7 @@ class ReviewDelete(DeleteView):
     print('self', self.object.article_id)
     return reverse('articles_detail', kwargs={'article_id': self.object.article_id })
 
-class ReplyUpdate(UpdateView):
+class ReplyUpdate(LoginRequiredMixin, UpdateView):
   model=Reply
   fields = ['content']
 

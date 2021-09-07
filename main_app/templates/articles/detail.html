@@ -30,21 +30,23 @@
       <a href="{% url 'articles_update' article.id %}" class="btn btn-warning">Edit</a>
       <a href="{% url 'articles_delete' article.id %}" class="btn btn-danger">Delete</a>
   </div>
-
   <div>
     {% for review in reviews %}
       <div>
         Review by {{review.user}}: {{review.content}}
       </div>
-      <a href="{% url 'update_reviews' review.id %}" class="btn btn-warning">Edit</a>
-      <a href="{% url 'delete_reviews' review.id %}" class="btn btn-danger">Delete</a> 
-    
+      {% if user.id == review.user_id %}
+        <a href="{% url 'update_reviews' review.id %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'delete_reviews' review.id %}" class="btn btn-danger">Delete</a> 
+      {% endif %}
       {% for reply in replies %}
         {% if reply.review_id == review.id %}
           <div>
             Reply by {{reply.user}} for {{review.content}}: {{reply.content}}
-            <a href="{% url 'update_replies' reply.id %}" class="btn btn-warning">Edit</a>
-            <a href="{% url 'delete_replies' reply.id %}" class="btn btn-danger">Delete</a> 
+            {% if user.id == reply.user_id %}
+              <a href="{% url 'update_replies' reply.id %}" class="btn btn-warning">Edit</a>
+              <a href="{% url 'delete_replies' reply.id %}" class="btn btn-danger">Delete</a>
+            {% endif %}
           </div>
         {% endif %} 
       {% endfor %} 
