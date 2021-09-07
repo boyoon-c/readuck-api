@@ -2,15 +2,10 @@
 {% load static %}
 
 {% block head %}
-{% comment %} <link 
-  rel="stylesheet" 
-  type="text/css" 
-  href="{% static 'css/cat-detail.css' %}"
-/> {% endcomment %}
 {% endblock %}
 
 {% block content %}
-
+ <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/> 
 <section class="">
   <div class="">
     <img 
@@ -27,56 +22,68 @@
     <p>Published in: {{ article.journal }}</p>
     <p>Uploaded by: {{ article.user }}</p>
     <p>Abstract: {{ article.abstract }}</p>
-      <a href="{% url 'articles_update' article.id %}" class="btn btn-warning">Edit</a>
-      <a href="{% url 'articles_delete' article.id %}" class="btn btn-danger">Delete</a>
+      <a href="{% url 'articles_update' article.id %}" class="btn">Edit</a>
+      <a href="{% url 'articles_delete' article.id %}" class="btn">Delete</a>
   </div>
-  <div>
-    {% for review in reviews %}
-      <div>
-        Review by {{review.user}}: {{review.content}}
-      </div>
-      {% if user.id == review.user_id %}
-        <a href="{% url 'update_reviews' review.id %}" class="btn btn-warning">Edit</a>
-        <a href="{% url 'delete_reviews' review.id %}" class="btn btn-danger">Delete</a> 
-      {% endif %}
-      {% for reply in replies %}
-        {% if reply.review_id == review.id %}
-          <div>
-            Reply by {{reply.user}} for {{review.content}}: {{reply.content}}
-            {% if user.id == reply.user_id %}
-              <a href="{% url 'update_replies' reply.id %}" class="btn btn-warning">Edit</a>
-              <a href="{% url 'delete_replies' reply.id %}" class="btn btn-danger">Delete</a>
-            {% endif %}
-          </div>
-        {% endif %} 
-      {% endfor %} 
-      
-    <form 
-      action = "{% url 'add_replies' article.id review.id %}"
-      method="post"
-      class="subsection-content">
-    <label for="">Add a reply</label>
-    {% csrf_token %}
-    {{ reply_form.as_p }}
-    <button type="submit" class="btn submit btn-secondary">Add Reply</button>
-    </form> 
-    {% endfor %}
- 
-    
-    <div>Section for Review
+  <div class="row m-4">
+    <h3 class="fs-4 text-center">Section for Review</h3>
     <form
       action = "{% url 'add_reviews' article.id %}"
       method = "post"
-      class="subsection-content">
+      class="d-flex justify-content-center">
       {% csrf_token %}
-      {{ review_form.as_p}}
-      <button type="submit" class="btn submit btn-primary">Add Review</button>
+      <table>
+      {{ review_form.as_table}}
+      </table>
+      <button type="submit" class="btn">Add Review</button>
     </form>
-    </div>
   </div>
 
+  <div class="">
+    <div class="row g-3">
+      <div class="col">
+        <embed src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf"   height="700px" width="500">
+      </div>
+
+      <div class="col g-3">
+        {% for review in reviews %}
+        <div class="card h-80">
+          Review by {{review.user}}: {{review.content}}
+          {% if user.id == review.user_id %}
+            <a href="{% url 'update_reviews' review.id %}" class="btn">Edit</a>
+            <a href="{% url 'delete_reviews' review.id %}" class="btn">Delete</a> 
+          {% endif %}
+
+          {% for reply in replies %}
+            {% if reply.review_id == review.id %}
+              <div>
+                Reply by {{reply.user}} for {{review.content}}: {{reply.content}}
+                {% if user.id == reply.user_id %}
+                  <a href="{% url 'update_replies' reply.id %}" class="btn">Edit</a>
+                  <a href="{% url 'delete_replies' reply.id %}" class="btn">Delete</a>
+                {% endif %}
+              </div>
+            {% endif %} 
+          {% endfor %} 
+        
+          <form 
+            action = "{% url 'add_replies' article.id review.id %}"
+            method="post"
+            class="subsection-content">
+            <label for="">Add a reply</label>
+            {% csrf_token %}
+            {{ reply_form.as_p }}
+            <button type="submit" class="btn">Add Reply</button>
+          </form> 
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+    
+    
+
+
   
-  <embed src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf"   height="700px" width="500">
 
 </section>
 {% endblock %}
