@@ -30,9 +30,8 @@ urlpatterns = [
   path('groups/<int:pk>/update/', views.GroupUpdate.as_view(), name='groups_update'),
   path('groups/<int:pk>/delete/', views.GroupDelete.as_view(), name='groups_delete'),
 
-
+  # group articles
   path('groups/<int:pk>/add_articles/', views.GroupArticleCreate.as_view(), name='add_group_articles'),
   path('groups/<int:pk>/delete_articles/', views.GroupArticleDelete.as_view(), name='delete_group_articles'),
   
-  # path('login/', views.login, name='login')
 ]

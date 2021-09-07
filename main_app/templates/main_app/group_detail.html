@@ -20,10 +20,6 @@
     <a href="{% url 'articles_detail' article.id %}">{{article}}</a>
     {% endfor%}
   </p> {% endcomment %}
-  {% for article in group_article_list %}
-    <p>{{article.title}}</p>
-    <a href="{% url 'delete_group_articles' article.id %}" class="btn danger">Delete</a>
-  {% endfor %}
 
   <p>
   Participants: 
@@ -33,7 +29,16 @@
   </p>
   <a href="{% url 'groups_update' group.id %}" class="btn warn">Edit</a>
   <a href="{% url 'groups_delete' group.id %}" class="btn danger">Delete</a>
-  <a href="{% url 'add_group_articles' group.id %}" class="btn danger">Add an article</a>
 </div>
-
+<div>
+  {% for article in group_article_list %}
+    <p>{{article.title}}</p>
+    <a href="{% url 'delete_group_articles' article.id %}" class="btn danger">Delete</a>
+  {% endfor %}
+  {% if group_article_list %}
+    <a href="{% url 'add_group_articles' group.id %}" class="btn danger">Add another article</a>
+  {% else %}
+    <a href="{% url 'add_group_articles' group.id %}" class="btn danger">Add an article</a>
+  {% endif %}
+</div>
 {% endblock %}
