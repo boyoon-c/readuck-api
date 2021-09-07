@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
 <div class="page-header">
   {% if object %}
-    <h3>Edit {{object.name}}</h3>
+    <h3 class="mb-4">Edit "{{object.name}}"</h3>
   {% else %}
     <h3 class="mb-4">Add a Group</h4>
   {% endif %}
@@ -18,7 +18,7 @@
   <table>
     {{ form.as_table }}
   </table>
-  <button type="submit" class="btn submit">Submit!</button>
+  <button type="submit" class="btn submit">Submit</button>
 </form>
 
 {% endblock %}

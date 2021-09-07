@@ -54,3 +54,7 @@ td > textarea {
   align-self: flex-center;
   margin-top: 20px;
 }
+
+.btn:hover{
+  background-color: #fbda99;
+}
