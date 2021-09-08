@@ -69,3 +69,9 @@ a {
     font-weight: 500;
     color: #482ff7;
 }
+
+.search-btn {
+    background-color: greenyellow;
+    align-self: flex-center;
+    margin-top: 20px;
+  }

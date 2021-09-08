@@ -20,7 +20,7 @@
  
   <form action="{% url 'login' %}" method="post" class="login">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.as_table }}
     <input type="hidden" name="next" value="{{ next }}">
     <button type="submit" class="btn submit">Login</button>
   </form>

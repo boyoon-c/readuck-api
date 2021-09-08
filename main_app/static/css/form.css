@@ -29,7 +29,7 @@ table {
 th {
   text-align: center;
   padding: 6px 20px 0 0;
-  font-weight: normal;
+  /* font-weight: normal; */
   vertical-align: top;
   font-size: var(--font-reg);
 }
@@ -58,3 +58,10 @@ td > textarea {
 .btn:hover{
   background-color: #fbda99;
 }
+
+.searchBtn {
+  background-color: #e3f2fe;
+  align-self: flex-center;
+  margin-top: 20px;
+}
+
