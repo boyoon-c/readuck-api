@@ -42,6 +42,11 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'profile_detail' %}">Profile</a>
           </li>
+          <li>
+            <form action="{% url 'search' %}" method="GET">
+              <input type="text" name='query' placeholder="Search" />
+            </form>
+          </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Log Out</a>
           </li>

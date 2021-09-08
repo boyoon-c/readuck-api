@@ -229,3 +229,14 @@ def profile(request):
     'replies': replies,
     'user_group': user_group
   })
+
+def search(request):
+  if request.method =='GET':
+    article_title=request.GET.get('query')
+    try: 
+      status=Article.objects.filter(title__icontains=article_title)
+      return render(request, 'search.html', {"articles": status })
+    except:
+      return render(request, "search.html", {"articles": status})
+  else:
+    return render(request, "search.html", {})

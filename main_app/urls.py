@@ -38,5 +38,8 @@ urlpatterns = [
   path('articles/<int:article_id>/add_file/', views.add_file, name='add_file'),
 
   # profile page
-  path('profile/', views.profile, name='profile_detail')
+  path('profile/', views.profile, name='profile_detail'),
+
+  # search
+  path('search/', views.search, name='search')
 ]
