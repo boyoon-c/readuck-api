@@ -210,3 +210,19 @@ def add_file(request, article_id):
     except Exception as err:
       print('An error occured uploading file to S3: %s' % err)
   return redirect('articles_detail', article_id=article_id)
+
+
+def profile(request):
+  articles = Article.objects.filter(user=request.user)
+  reviews = Review.objects.filter(user=request.user)
+  replies = Reply.objects.filter(user=request.user)
+  for reply in replies:
+    print(reply.review.article)
+  # temp = replies.select_related('review__id')
+  
+  
+  return render(request, 'profile.html', {
+    'articles': articles,
+    'reviews': reviews,
+    'replies': replies
+  })

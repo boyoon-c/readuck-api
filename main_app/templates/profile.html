@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+{% endblock head %}
+
+{% block content %}
+  Profile Page
+  <div>
+  Posted articles
+  {% for article in articles %}
+  <div>{{ article.title }}</div>
+  {% endfor %}
+  </div>
+
+  <div>
+  Posted reviews
+  {% for review in reviews %}
+  <div>{{ review.content }}</div>
+  {% endfor %}
+  </div>
+
+  <div>
+  Posted replies
+  {% for reply in replies %}
+  <div>{{ reply.content }}</div>
+  <div>
+    This is reply to {{ reply.review.content }}, 
+    for article {{ reply.review.article }}
+  </div>
+  {% endfor %}
+  </div>
+
+
+  
+{% endblock content %}

@@ -35,5 +35,8 @@ urlpatterns = [
   path('groups/<int:pk>/delete_articles/', views.GroupArticleDelete.as_view(), name='delete_group_articles'),
   
   # file upload
-  path('articles/<int:article_id>/add_file/', views.add_file, name='add_file')
+  path('articles/<int:article_id>/add_file/', views.add_file, name='add_file'),
+
+  # profile page
+  path('profile/', views.profile, name='profile_detail')
 ]
