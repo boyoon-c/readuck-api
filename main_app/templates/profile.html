@@ -6,32 +6,66 @@
 {% endblock head %}
 
 {% block content %}
-  Profile Page
-  <div>
-  Posted articles
-  {% for article in articles %}
-  <div>{{ article.title }}</div>
-  {% endfor %}
+  <div class="container text-center" style="height: 100%; width: 100%">
+    <div class="row" style="height: 90%; width:100%">
+      <div class="col card align-middle mt-5 mb-5 me-3" >
+      <div class="m-3 fs-4">
+        Posted Articles
+      </div>
+        {% for article in articles %}
+          <div class="card m-2">
+            <div class="card-body">
+            <a href="{% url 'articles_detail' article.id %}">
+              {{ article.title }}
+            </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="col card align-middle mt-5 mb-5 me-3">
+        <div class="m-3 fs-4">
+          Posted Reviews
+        </div>
+        {% for review in reviews %}
+          <div class="card m-2">
+            <div class="card-header">
+              Review for 
+              <a href="{% url 'articles_detail' review.article.id %}">
+                {{ review.article.title }}
+              </a>
+            </div>
+            <div class="card-body">
+              My review <br />
+              "{{ review.content }}"
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+      <div class="col card align-middle mt-5 mb-5 me-3">
+        <div class="m-3 fs-4">
+          Posted Replies
+        </div>
+        {% for reply in replies %}
+        <div class="card mb-2">
+          <div class="card-header">
+            Reply to review
+            <br /> "{{ reply.review.content }}"
+          </div>
+          <div class="card-body"> 
+            My reply <br />
+            "{{ reply.content }}"
+          </div>
+          <div class="card-footer">
+            Belongs to 
+            <a href="{% url 'articles_detail' reply.review.article.id %}">{{ reply.review.article }}</a>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
   </div>
 
-  <div>
-  Posted reviews
-  {% for review in reviews %}
-  <div>{{ review.content }}</div>
-  {% endfor %}
-  </div>
-
-  <div>
-  Posted replies
-  {% for reply in replies %}
-  <div>{{ reply.content }}</div>
-  <div>
-    This is reply to {{ reply.review.content }}, 
-    for article {{ reply.review.article }}
-  </div>
-  {% endfor %}
-  </div>
-
-
-  
 {% endblock content %}
