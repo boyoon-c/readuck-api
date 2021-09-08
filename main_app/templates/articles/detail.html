@@ -70,6 +70,12 @@
       <div class="col text-center">
         {% if article.file.url %}
           <embed src={{ article.file.url }} type="application/pdf"   height="700px" width="100%">
+          <h1>"https://docs.google.com/viewer?url={{ article.file.url }}&embedded=true"</h1>
+          <object data={{ article.file.url }} type="application/pdf">
+            <iframe src="https://docs.google.com/viewer?url={{ article.file.url }}&embedded=true"></iframe>
+          </object>
+
+
           {% comment %} <iframe
             src="{{ article.file.url }}">
           </iframe> {% endcomment %}
