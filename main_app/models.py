@@ -91,6 +91,9 @@ class File(models.Model):
   url = models.CharField(max_length=250)
   article = models.OneToOneField(Article, on_delete=models.CASCADE)
 
+  def __str__(self):
+    return f"File for article_id: {self.article_id} @{self.url}"
+
 '''
 # Comment
 class Comment(models.Model):

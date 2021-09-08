@@ -1,7 +1,8 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy, reverse
-from .models import Article, Group, GroupArticle, Review, Reply
+# from .models import Article, Group, GroupArticle, Review, Reply, File
+from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views import View
 from django.views.generic import ListView, DetailView
@@ -13,8 +14,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
 from main_app import models
 import uuid
-import boto3
+import boto3 
 import pandas as pd
+
+S3_BASE_URL = 'https://s3.us-west-2.amazonaws.com/'
+BUCKET = 'my-readuck-bucket'
 
 # Create your views here.
 '''
@@ -189,3 +193,20 @@ class GroupArticleDelete(DeleteView):
 
   def get_success_url(self):
     return reverse('groups_detail', kwargs={'pk': self.object.group_id })
+
+def add_file(request, article_id):
+  article_file = request.FILES.get('article-file', None)
+  if article_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex + article_file.name[article_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(article_file, BUCKET, key)
+      url = f'{S3_BASE_URL}{BUCKET}/{key}'
+      article = File(url=url, article_id=article_id)
+      article_file = File.objects.filter(article_id=article_id)
+      if article_file.first():
+        article_file.first().delete()
+      article.save()
+    except Exception as err:
+      print('An error occured uploading file to S3: %s' % err)
+  return redirect('articles_detail', article_id=article_id)
