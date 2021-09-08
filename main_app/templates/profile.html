@@ -63,8 +63,22 @@
           </div>
         </div>
         {% endfor %}
-
       </div>
+      <div class="col card align-middle mt-5 mb-5 me-3">
+        <div class="m-3 fs-4">
+          Joined Groups
+        </div>
+        {% for group in user_group %}
+          <div class="card mb-2">
+            <div class="card-body">
+              <a href="{% url 'groups_detail' group.id %}">
+              {{group.name}}
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
     </div>
   </div>
 
