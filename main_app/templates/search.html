@@ -1,37 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block head %}
+
 {% endblock head %}
 
 {% block content %}
+
 <div class="row row-cols-1 row-cols-md-3 g-4 m-4">
   {% for article in articles %}
     <div class="col">
       <div class="card h-100">
-      <div class="text-center mt-3">
-        <a href="{% url 'articles_detail' article.id %}" style="text-decoration:none; color:#ec900f;">
-          <img src="{% static 'images/ducky.jpg' %}" style="width: 40%;" class="card-img-top" alt="...">
-      </div>
-      <div class="card-body">
-        <h5 class="card-title text-center">{{ article.title }}</h5>
-        </a>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Author: {{article.author}}</li>
-        <li class="list-group-item">Year: {{article.year}}</li>
-        <li class="list-group-item">Journal: {{ article.journal }}</li> 
-      </ul>
-      <div class="card-footer">
-        <small class="text-muted">
-          <a href="{% url 'articles_detail' article.id %}"
-            style="text-decoration:none;"
-            class="text-muted">
-            Take me to this article
+        <div class="text-center mt-3">
+          <a href="{% url 'articles_detail' article.id %}" style="text-decoration:none; color:#ec900f;">
+            <img src="{% static 'images/ducky.jpg' %}" style="width: 40%;" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title text-center">{{ article.title }}</h5>
           </a>
-        </small>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Author: {{article.author}}</li>
+            <li class="list-group-item">Year: {{article.year}}</li>
+            <li class="list-group-item">Journal: {{ article.journal }}
+            </li> 
+          </ul>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">
+            <a href="{% url 'articles_detail' article.id %}"
+              style="text-decoration:none;"
+              class="text-muted">
+              Take me to this article
+            </a>
+          </small>
+        </div>
       </div>
     </div>
   {% endfor %}
+</div>
+
 {% endblock %}
