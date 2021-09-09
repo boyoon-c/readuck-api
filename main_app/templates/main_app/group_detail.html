@@ -34,16 +34,31 @@
   {% for article in group_article_list %}
     <p>{{article.title}}</p>
     <a href="{% url 'delete_group_articles' article.id %}" class="btn danger">Delete</a>
+    <a href="{% url 'add_group_articles_reviews' article.id %}" class="btn danger">Add a review</a>
+    <form
+      action = "{% url 'add_group_articles_reviews' article.id %}"
+      method = "post"
+      class="">
+      {% csrf_token %}
+      <table>
+      {{ group_article_review_form.as_table}}
+      </table>
+        <button type="submit" class="btn text-center">Add Review</button>
+    </form>
+
   {% endfor %}
   {% if group_article_list %}
     <a href="{% url 'add_group_articles' group.id %}" class="btn danger">Add another article</a>
   {% else %}
     <a href="{% url 'add_group_articles' group.id %}" class="btn danger">Add an article</a>
   {% endif %}
-</div>
-
+<div>
   {% for review in group_article_review_list %}
     {{review.content}} for 
     {{review.grouparticle.title }}
+    <a href="{% url 'update_group_articles_reviews' review.id %}" class="btn danger">Edit a review</a>
+
   {% endfor %}
+
+</div>
 {% endblock %}

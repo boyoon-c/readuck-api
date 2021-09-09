@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Review, Reply
+from .models import GroupArticleReview, Review, Reply
 
 class ReviewForm(ModelForm):
   class Meta:
@@ -10,3 +10,8 @@ class ReplyForm(ModelForm):
   class Meta: 
     model = Reply
     fields = ['content']
+
+class GroupArticleReviewForm(ModelForm):
+  class Meta:
+    model=GroupArticleReview
+    fields=['content']

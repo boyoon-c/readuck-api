@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}{% endblock head %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
+
+<div class="page-header">
+<h3 class="mb-4">Add a Review</h3>
+</div>
+<form method="post" class="form-container" autocomplete="off">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <button type="submit" class='btn'>Update a review</button>
+</form>
+
+{% endblock content %}

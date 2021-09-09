@@ -163,10 +163,9 @@ class GroupDetail(DetailView):
     temp=[]
     for item in context['group_article_list']:
       temp.append(item)
-    print(temp)
+
     context['group_article_review_list']=GroupArticleReview.objects.filter(grouparticle__in=temp)
-    print('context', context)
-    
+    context['group_article_review_form']=GroupArticleReviewForm()
     return context
 
 class GroupUpdate(UpdateView):
@@ -182,7 +181,7 @@ class GroupArticleCreate(CreateView):
   fields=['author', 'title', 'abstract', 'citation', 'journal', 'year']
 
   def get_success_url(self):
-    print('self', self.object.group_id)
+    # print('self', self.object.group_id)
     return reverse('groups_detail', kwargs={'pk': self.object.group_id })
 
   def form_valid(self, form):
@@ -249,3 +248,27 @@ def search(request):
       return render(request, "search.html", {"articles": status})
   else:
     return render(request, "search.html", {})
+
+
+class GroupArticleReviewCreate(CreateView):
+  model = GroupArticleReview
+  fields=['content']
+
+  def get_success_url(self):
+    print('self.object.grouparticle.group.id', self.object.grouparticle.group.id)
+    return reverse('groups_detail', kwargs={'pk': self.object.grouparticle.group.id })    
+
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    form.instance.grouparticle_id = self.kwargs['pk']
+    print('kwargs', self.kwargs['pk'])
+    response=super().form_valid(form)
+    return response
+
+class GroupArticleReviewUpdate(LoginRequiredMixin, UpdateView):
+  model=GroupArticleReview
+  fields = ['content']
+  def get_success_url(self):
+    print('self.object.grouparticle.group.id', self.object.grouparticle.group.id)
+    return reverse('groups_detail', kwargs={'pk': self.object.grouparticle.group.id })    

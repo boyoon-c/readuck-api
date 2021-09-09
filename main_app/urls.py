@@ -34,6 +34,10 @@ urlpatterns = [
   path('groups/<int:pk>/add_articles/', views.GroupArticleCreate.as_view(), name='add_group_articles'),
   path('groups/<int:pk>/delete_articles/', views.GroupArticleDelete.as_view(), name='delete_group_articles'),
   
+  # group articles reviews
+  path('groups/articles/<int:pk>/add_reviews/', views.GroupArticleReviewCreate.as_view(), name='add_group_articles_reviews'),
+  path('groups/articles/reviews/<int:pk>/update/', views.GroupArticleReviewUpdate.as_view(), name='update_group_articles_reviews'),
+
   # file upload
   path('articles/<int:article_id>/add_file/', views.add_file, name='add_file'),
 
