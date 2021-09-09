@@ -81,6 +81,13 @@ class GroupArticle(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE) 
   group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
+class GroupArticleReview(models.Model):
+  content = models.TextField(
+    max_length=500
+  )
+  grouparticle=models.ForeignKey(GroupArticle, on_delete=models.CASCADE)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 # def get_absolute_url(self):
 #   print('self.id', self.id)
 #   return reverse('groups_detail', kwargs={'pk': self.group_id })

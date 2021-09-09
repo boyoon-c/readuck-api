@@ -153,11 +153,20 @@ class GroupDetail(DetailView):
   model = Group
 
   def get_context_data(self, **kwargs):
+    print('self', self)
     # Call the base implementation first to get a context
     context = super().get_context_data(**kwargs)
+    print('context', context)
     # Add in a QuerySet of all the groups
     context['group_article_list'] = GroupArticle.objects.filter(group_id=self.object.id)
-    print('context', context['group_article_list'])
+    
+    temp=[]
+    for item in context['group_article_list']:
+      temp.append(item)
+    print(temp)
+    context['group_article_review_list']=GroupArticleReview.objects.filter(grouparticle__in=temp)
+    print('context', context)
+    
     return context
 
 class GroupUpdate(UpdateView):

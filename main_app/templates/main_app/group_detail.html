@@ -41,4 +41,9 @@
     <a href="{% url 'add_group_articles' group.id %}" class="btn danger">Add an article</a>
   {% endif %}
 </div>
+
+  {% for review in group_article_review_list %}
+    {{review.content}} for 
+    {{review.grouparticle.title }}
+  {% endfor %}
 {% endblock %}
