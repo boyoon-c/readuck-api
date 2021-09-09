@@ -129,4 +129,8 @@ LOGIN_URL = 'home'
 LOGIN_REDIRECT_URL = 'articles_index'
 LOGOUT_REDIRECT_URL = 'home'
 
+import django_heroku
+django_heroku.settings(locals())
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEBUG_PROPAGATE_EXCEPTIONS = True
