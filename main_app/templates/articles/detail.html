@@ -74,7 +74,8 @@
         {% if article.file.url %}
           <embed src={{ article.file.url }} type="application/pdf"   height="1000px" width="100%">
         {% else %}
-          <embed src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf"   height="700px" width="100%">
+          <img src="{% static 'images/card-background.jpg' %}" alt="..." height="700px" width="100%">
+          {% comment %} <embed src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf"   height="700px" width="100%"> {% endcomment %}
         {% endif %}
         <div class="card m-3">
         <p class="mt-4">Upload {{ article.title }}'s file</p>
