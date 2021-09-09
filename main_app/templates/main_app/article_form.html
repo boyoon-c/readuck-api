@@ -7,7 +7,11 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
 
 <div class="page-header">
-<h3 class="mb-4">Edit an Article </h3>
+{% if object %}
+	<h3 class="mb-4">Add an Article </h3>
+{% else %}
+	<h3 class="mb-4">Edit an Article </h3>
+{% endif %}
 </div>
 <form method="post" class="form-container" autocomplete="off">
 	{% csrf_token %}
