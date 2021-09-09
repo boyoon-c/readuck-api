@@ -26,8 +26,12 @@
           <li class="list-group-item">Added by: {{ article.user }}</li>
         </ul>
       </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
+      <div class="card-footer text-center">
+        <small class="text-muted">
+          <a href="/articles/{{article.id}}" class="btn btn-outline-secondary">
+            Details
+          </a>
+        </small>
       </div>
     </div>
   </div>
