@@ -270,5 +270,10 @@ class GroupArticleReviewUpdate(LoginRequiredMixin, UpdateView):
   model=GroupArticleReview
   fields = ['content']
   def get_success_url(self):
-    print('self.object.grouparticle.group.id', self.object.grouparticle.group.id)
     return reverse('groups_detail', kwargs={'pk': self.object.grouparticle.group.id })    
+
+class GroupArticleReviewDelete(DeleteView):
+  model=GroupArticleReview
+  def get_success_url(self):
+    return reverse('groups_detail', kwargs={'pk': self.object.grouparticle.group.id })    
+

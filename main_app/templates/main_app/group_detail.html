@@ -57,6 +57,7 @@
     {{review.content}} for 
     {{review.grouparticle.title }}
     <a href="{% url 'update_group_articles_reviews' review.id %}" class="btn danger">Edit a review</a>
+    <a href="{% url 'delete_group_articles_reviews' review.id %}" class="btn btn-danger">Delete a review</a>
 
   {% endfor %}
 

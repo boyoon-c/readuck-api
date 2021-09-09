@@ -7,12 +7,12 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
 
 <div class='page-header'>
-<h3 class="mb-4">Are you sure you want to delete "{{ object.title }}"?</h3>
+<h3 class="mb-4">Are you sure you want to delete "{{ object.content }}"?</h3>
 </div>
 
 <form action="" method="post" class="form-container">
   {% csrf_token %}
-  <a href="{% url 'groups_detail' object.group_id  %}" class="btn">
+  <a href="{% url 'groups_detail' object.grouparticle.group.id  %}" class="btn">
   Cancel
   </a>
   <button type="submit" class="btn">Yes - Delete</button>
