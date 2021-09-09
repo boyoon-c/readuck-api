@@ -2,64 +2,111 @@
 {% load static %} 
 
 {% block head %}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static '' %}"
-/>
+ <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/> 
 {% endblock %}
 
 {% block content %}
-  
-<div>
-  <p>Group Name: {{ group.name }}</p>
-  <p>Group Description: {{ group.description }}</p>
-  {% comment %} <p>
-  Articles: 
-    {% for article in group.articles.all %}
-    <a href="{% url 'articles_detail' article.id %}">{{article}}</a>
-    {% endfor%}
-  </p> {% endcomment %}
 
-  <p>
-  Participants: 
-    {% for participant in group.participants.all %}
-      {{participant}}
-    {% endfor%}
-  </p>
-  <a href="{% url 'groups_update' group.id %}" class="btn warn">Edit</a>
-  <a href="{% url 'groups_delete' group.id %}" class="btn danger">Delete</a>
-</div>
-<div>
-  {% for article in group_article_list %}
-    <p>{{article.title}}</p>
-    <a href="{% url 'delete_group_articles' article.id %}" class="btn danger">Delete</a>
-    <a href="{% url 'add_group_articles_reviews' article.id %}" class="btn danger">Add a review</a>
-    <form
-      action = "{% url 'add_group_articles_reviews' article.id %}"
-      method = "post"
-      class="">
-      {% csrf_token %}
-      <table>
-      {{ group_article_review_form.as_table}}
-      </table>
-        <button type="submit" class="btn text-center">Add Review</button>
-    </form>
+<section>
 
-  {% endfor %}
-  {% if group_article_list %}
-    <a href="{% url 'add_group_articles' group.id %}" class="btn danger">Add another article</a>
-  {% else %}
-    <a href="{% url 'add_group_articles' group.id %}" class="btn danger">Add an article</a>
-  {% endif %}
-<div>
-  {% for review in group_article_review_list %}
-    {{review.content}} for 
-    {{review.grouparticle.title }}
-    <a href="{% url 'update_group_articles_reviews' review.id %}" class="btn danger">Edit a review</a>
-    <a href="{% url 'delete_group_articles_reviews' review.id %}" class="btn btn-danger">Delete a review</a>
+  <div class="container justify-content-center">
+    <div class="card justify-content-center" style="max-width: 30rem;">
+        
+      
+      <div class="card-header">
+        <img 
+          src="{% static 'images/duckygroup.png' %}" 
+          alt="Smart duckie"
+          width="100%"
+          >
+      </div>
+      <div class="card-body text-dark">
+        <h5 class="card-title mb-4">Group Name: {{ group.name }}</h5>
+        <p class="card-text">Group Description: {{ group.description }}</p>
+        <p class="card-text">
+          Participants: 
+            {% for participant in group.participants.all %}
+              {{participant}}
+            {% endfor%}
+        </p>
+      </div>
+      <div class="container justify-content-center">
+        <a href="{% url 'groups_update' group.id %}" class="btn me-1 mb-2">Edit</a>
+        <a href="{% url 'groups_delete' group.id %}" class="btn me-1 mb-2">Delete</a>
+        <a class="btn mb-2" href="{% url 'add_group_articles' group.id %}">
+            Add an Article
+        </a>
+      </div>
+    </div>
+  </div>
+  {% comment %} list of articles {% endcomment %}
+  <div class="row row-cols-1 g-4 m-4">
+    {% for article in group_article_list %}
+    <div class="col">
+      <div class="card h-100">
+        <div class="text-center mt-3">
+          <img src="{% static 'images/article.png' %}" style="width: 20%; height:15rem" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title text-center">{{ article.title }}</h5>
+          <ul class="list-group list-group-flush text-center">
+            <li class="list-group-item">Author: {{ article.author }}</li>
+            <li class="list-group-item">Citation: {{ article.citation }}</li>
+            <li class="list-group-item">Journal: {{ article.journal }}</li>
+            <li class="list-group-item">Year: {{ article.year }}</li>
+            <li class="list-group-item">Added by: {{ article.user }}</li>
+          </ul>
+          <div class="text-center mb-3">
+            <a href="{% url 'delete_group_articles' article.id %}" class="btn danger">Delete</a>
+            <a class="btn danger" data-bs-toggle="collapse" href="#toggle{{article.id}}" role="button" aria-expanded="false" aria-controls="toggle{{article.id}}">
+              Add a review
+            </a>
+          </div>
+          
+              {% for review in group_article_review_list %}
+                {% if review.grouparticle_id == article.id %}
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="fs-5">
+                      {{ review.content }}
+                      </div>
+                      <div class="text-end mt-2">
+                       Reviewed by {{review.user}}
+                      </div>
+                    </div>
+                    {% if review.user_id == user.id %}
+                      <div class="text-end mb-3 me-3">
+                        <a href="{% url 'update_group_articles_reviews' review.id %}" class="btn">Edit a review</a>
+                        <a href="{% url 'delete_group_articles_reviews' review.id %}" class="btn">Delete a review</a>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              {% endfor %}
 
-  {% endfor %}
 
-</div>
+          <div class="collapse mb-5" id="toggle{{article.id}}">
+            <form
+              action = "{% url 'add_group_articles_reviews' article.id %}"
+              method = "post"
+              class="">
+              {% csrf_token %}
+              <table>
+              {{ group_article_review_form.as_table}}
+              </table>
+              <div class="text-center">
+                <button type="submit" class="btn">
+                  Add Review
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+
 {% endblock %}
