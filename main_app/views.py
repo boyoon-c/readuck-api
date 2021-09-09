@@ -21,11 +21,7 @@ S3_BASE_URL = 'https://s3.us-west-2.amazonaws.com/'
 BUCKET = 'my-readuck-bucket'
 
 # Create your views here.
-'''
-def article_index(request):
-  articles = Article.objects.all()
-  return render(request, '')
-'''
+
 class Login(LoginView):
     template_name='login.html'
     
@@ -138,7 +134,7 @@ class ArticleCreate(CreateView):
 
 class ArticleUpdate(UpdateView):
   model = Article
-  fields = '__all__'
+  fields = ["author", "title", "abstract", "citation", "journal", "year"]
 
 class ArticleDelete(DeleteView):
   model = Article

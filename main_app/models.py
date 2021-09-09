@@ -30,9 +30,7 @@ class Article(models.Model):
 
 # Reviews
 class Review(models.Model):
-  content = models.TextField(
-    max_length=500
-  )
+  content = models.TextField()
   user=models.ForeignKey(User, on_delete=models.CASCADE)
   article = models.ForeignKey(Article, on_delete=models.CASCADE)
   
@@ -43,9 +41,7 @@ class Review(models.Model):
 
 # Reply
 class Reply(models.Model):
-  content = models.TextField(
-    max_length=500
-  )
+  content = models.TextField()
   user=models.ForeignKey(User, on_delete=models.CASCADE)
   review = models.ForeignKey(Review, on_delete=models.CASCADE)
 
@@ -88,11 +84,6 @@ class GroupArticleReview(models.Model):
   grouparticle=models.ForeignKey(GroupArticle, on_delete=models.CASCADE)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-# def get_absolute_url(self):
-#   print('self.id', self.id)
-#   return reverse('groups_detail', kwargs={'pk': self.group_id })
-
-
 
 class File(models.Model):
   url = models.CharField(max_length=250)
@@ -101,19 +92,3 @@ class File(models.Model):
   def __str__(self):
     return f"File for article_id: {self.article_id} @{self.url}"
 
-'''
-# Comment
-class Comment(models.Model):
-  review=models.ForeignKey(Review,on_Delete=models.CASCADE)
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-# Review
-class Review(models.Model):
-  article = models.ForeignKey(Article, on_Delete = models.CASCADE)
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
-  comment = models.ForeignKey(Comment, on_Delete=models.CASCADE)
-  
-# Article file
-class File(models.Model):
-  url=models.CharField(max_length=250)
-'''
