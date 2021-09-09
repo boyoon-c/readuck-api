@@ -46,8 +46,6 @@ class Reply(models.Model):
   review = models.ForeignKey(Review, on_delete=models.CASCADE)
 
   def get_absolute_url(self):
-    # print(self.review.article_id)
-    # print('self', self.review_id)
     return reverse('articles_detail', kwargs={ 'article_id': self.review.article_id})
 
 # Group
@@ -78,9 +76,7 @@ class GroupArticle(models.Model):
   group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
 class GroupArticleReview(models.Model):
-  content = models.TextField(
-    max_length=500
-  )
+  content = models.TextField()
   grouparticle=models.ForeignKey(GroupArticle, on_delete=models.CASCADE)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
