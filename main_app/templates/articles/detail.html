@@ -32,8 +32,10 @@
         <p class="card-text">Published in: {{ article.journal }}</p>
         <p class="card-text">Uploaded by: {{ article.user }}</p>
         <div class="container justify-content-center">
-          <a href="{% url 'articles_update' article.id %}" class="btn m-1">Edit</a>
-          <a href="{% url 'articles_delete' article.id %}" class="btn m-1">Delete</a>
+          {% if user.id == article.user_id %}
+            <a href="{% url 'articles_update' article.id %}" class="btn m-1">Edit</a>
+            <a href="{% url 'articles_delete' article.id %}" class="btn m-1">Delete</a>
+          {% endif %}
           <a class="btn m-1" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             Leave a Review
           </a>

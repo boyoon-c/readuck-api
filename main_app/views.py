@@ -45,6 +45,7 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'signup.html', context)
 
+@login_required
 def articles_index(request):
   articles = Article.objects.all()
   return render(request, 'articles/index.html', {'articles': articles})
@@ -69,6 +70,7 @@ def articles_detail(request, article_id):
     'replies': replies
   })
 
+@login_required
 def add_reviews(request, article_id):
   form = ReviewForm(request.POST)
   if form.is_valid():
@@ -78,6 +80,7 @@ def add_reviews(request, article_id):
     new_review.save()
   return redirect('articles_detail', article_id=article_id)
 
+@login_required
 def add_replies(request, article_id, review_id):
   form = ReplyForm(request.POST)
   if form.is_valid():
@@ -88,11 +91,11 @@ def add_replies(request, article_id, review_id):
     new_reply.save()
   return redirect('articles_detail', article_id=article_id)
 
-class ReviewUpdate(UpdateView):
+class ReviewUpdate(LoginRequiredMixin, UpdateView):
   model=Review
   fields = ['content']
 
-class ReviewDelete(DeleteView):
+class ReviewDelete(LoginRequiredMixin, DeleteView):
   model=Review
   
   def get_success_url(self):
@@ -103,7 +106,7 @@ class ReviewUpdate(LoginRequiredMixin, UpdateView):
   model=Review
   fields = ['content']
 
-class ReviewDelete(DeleteView):
+class ReviewDelete(LoginRequiredMixin, DeleteView):
   model=Review
   
   def get_success_url(self):
@@ -114,14 +117,14 @@ class ReplyUpdate(LoginRequiredMixin, UpdateView):
   model=Reply
   fields = ['content']
 
-class ReplyDelete(DeleteView):
+class ReplyDelete(LoginRequiredMixin, DeleteView):
   model=Reply
   
   def get_success_url(self):
     print('self', self.object.review.article_id)
     return reverse('articles_detail', kwargs={'article_id': self.object.review.article_id })
 
-class ArticleCreate(CreateView):
+class ArticleCreate(LoginRequiredMixin, CreateView):
   model = Article
   fields = ["author", "title", "abstract", "citation", "journal", "year"]
   success_url='/articles/'
@@ -132,22 +135,22 @@ class ArticleCreate(CreateView):
     return response
 
 
-class ArticleUpdate(UpdateView):
+class ArticleUpdate(LoginRequiredMixin, UpdateView):
   model = Article
   fields = ["author", "title", "abstract", "citation", "journal", "year"]
 
-class ArticleDelete(DeleteView):
+class ArticleDelete(LoginRequiredMixin, DeleteView):
   model = Article
   success_url = '/articles/'
 
-class GroupList(ListView):
+class GroupList(LoginRequiredMixin, ListView):
   model = Group 
 
-class GroupCreate(CreateView):
+class GroupCreate(LoginRequiredMixin, CreateView):
   model = Group
   fields = '__all__'
 
-class GroupDetail(DetailView):
+class GroupDetail(LoginRequiredMixin, DetailView):
   model = Group
 
   def get_context_data(self, **kwargs):
@@ -166,15 +169,15 @@ class GroupDetail(DetailView):
     context['group_article_review_form']=GroupArticleReviewForm()
     return context
 
-class GroupUpdate(UpdateView):
+class GroupUpdate(LoginRequiredMixin, UpdateView):
   model = Group
   fields = ['name','description', 'participants']
 
-class GroupDelete(DeleteView):
+class GroupDelete(LoginRequiredMixin, DeleteView):
   model = Group
   success_url='/groups/'
 
-class GroupArticleCreate(CreateView):
+class GroupArticleCreate(LoginRequiredMixin, CreateView):
   model = GroupArticle
   fields=['author', 'title', 'abstract', 'citation', 'journal', 'year']
 
@@ -189,16 +192,17 @@ class GroupArticleCreate(CreateView):
     return response
 
 
-class GroupArticleUpdate(UpdateView):
+class GroupArticleUpdate(LoginRequiredMixin, UpdateView):
   model = GroupArticle
   fields=['']
 
-class GroupArticleDelete(DeleteView):
+class GroupArticleDelete(LoginRequiredMixin, DeleteView):
   model = GroupArticle
 
   def get_success_url(self):
     return reverse('groups_detail', kwargs={'pk': self.object.group_id })
 
+@login_required
 def add_file(request, article_id):
   article_file = request.FILES.get('article-file', None)
   if article_file:
@@ -216,7 +220,7 @@ def add_file(request, article_id):
       print('An error occured uploading file to S3: %s' % err)
   return redirect('articles_detail', article_id=article_id)
 
-
+@login_required
 def profile(request):
   articles = Article.objects.filter(user=request.user)
   reviews = Review.objects.filter(user=request.user)
@@ -235,6 +239,7 @@ def profile(request):
     'user_group': user_group
   })
 
+@login_required
 def search(request):
   if request.method =='GET':
     article_title=request.GET.get('query')
@@ -247,7 +252,7 @@ def search(request):
     return render(request, "search.html", {})
 
 
-class GroupArticleReviewCreate(CreateView):
+class GroupArticleReviewCreate(LoginRequiredMixin, CreateView):
   model = GroupArticleReview
   fields=['content']
 
@@ -269,7 +274,7 @@ class GroupArticleReviewUpdate(LoginRequiredMixin, UpdateView):
   def get_success_url(self):
     return reverse('groups_detail', kwargs={'pk': self.object.grouparticle.group.id })    
 
-class GroupArticleReviewDelete(DeleteView):
+class GroupArticleReviewDelete(LoginRequiredMixin, DeleteView):
   model=GroupArticleReview
   def get_success_url(self):
     return reverse('groups_detail', kwargs={'pk': self.object.grouparticle.group.id })    
