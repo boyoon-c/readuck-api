@@ -74,7 +74,6 @@ def articles_detail(request, article_id):
   })
 
 def add_reviews(request, article_id):
-  print("request.user", request.user)
   form = ReviewForm(request.POST)
   if form.is_valid():
     new_review=form.save(commit=False)
@@ -126,13 +125,16 @@ class ReplyDelete(DeleteView):
     print('self', self.object.review.article_id)
     return reverse('articles_detail', kwargs={'article_id': self.object.review.article_id })
 
-
-
-
 class ArticleCreate(CreateView):
   model = Article
-  fields = '__all__'
+  fields = ["author", "title", "abstract", "citation", "journal", "year"]
   success_url='/articles/'
+  
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    response=super().form_valid(form)
+    return response
+
 
 class ArticleUpdate(UpdateView):
   model = Article
@@ -181,7 +183,6 @@ class GroupArticleCreate(CreateView):
   fields=['author', 'title', 'abstract', 'citation', 'journal', 'year']
 
   def get_success_url(self):
-    # print('self', self.object.group_id)
     return reverse('groups_detail', kwargs={'pk': self.object.group_id })
 
   def form_valid(self, form):
