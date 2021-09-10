@@ -16,9 +16,7 @@ class Article(models.Model):
   citation = models.IntegerField()
   journal=models.CharField(max_length=250)
   year= models.IntegerField()
-  ## user should be many-to-many
   user = models.ForeignKey(User, on_delete=models.CASCADE) 
-  ## group should be many-to-many
   
   def __str__(self):
     return self.title

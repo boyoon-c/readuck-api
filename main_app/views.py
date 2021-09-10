@@ -1,7 +1,6 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy, reverse
-# from .models import Article, Group, GroupArticle, Review, Reply, File
 from .models import *
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views import View

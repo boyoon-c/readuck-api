@@ -75,7 +75,6 @@
           <embed src={{ article.file.url }} type="application/pdf"   height="1000px" width="100%">
         {% else %}
           <img src="{% static 'images/card-background.jpg' %}" alt="..." height="700px" width="100%">
-          {% comment %} <embed src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf"   height="700px" width="100%"> {% endcomment %}
         {% endif %}
         <div class="card m-3">
         <p class="mt-4">Upload {{ article.title }}'s file</p>
@@ -114,7 +113,7 @@
               <div>
                 <div class="collapse multi-collapse mb-5" id="multi{{ review.id }}">
                   <div class="card m-4 card-body">
-                      Reply by {{reply.user}} for {{review.content}}: {{reply.content}} <br/>
+                      Reply by {{reply.user}} about "{{review.content}}": {{reply.content}} <br/>
                     {% if user.id == reply.user_id %}
                       <div>
                       <a href="{% url 'update_replies' reply.id %}" class="btn">Edit</a>
@@ -141,7 +140,7 @@
                 </table>
             </div>
                 <div class="container justify-content-center mb-5">
-                  <button type="submit" class="btn text-center">Add Review</button>
+                  <button type="submit" class="btn text-center">Add Reply</button>
                 </div>
               </form>
           </div>
