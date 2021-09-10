@@ -113,7 +113,7 @@
               <div>
                 <div class="collapse multi-collapse mb-5" id="multi{{ review.id }}">
                   <div class="card m-4 card-body">
-                      Reply by {{reply.user}} about "{{review.content}}": {{reply.content}} <br/>
+                      Reply by {{reply.user}} : {{reply.content}} 
                     {% if user.id == reply.user_id %}
                       <div>
                       <a href="{% url 'update_replies' reply.id %}" class="btn">Edit</a>
