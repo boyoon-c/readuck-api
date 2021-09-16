@@ -37,6 +37,21 @@
     </div>
   </div>
   {% endfor %}
+
+  <div class="col">
+    <div class="card " style="width: 18rem;">
+      <div class="text-center m-3">
+      <img src="{% static 'images/smartduck.jpg' %}" style="width: 70%;" class="card-img-top" alt="...">
+      </div>
+      <div class="card-body text-center align-middle">
+        <h5 class="card-text text-center"></h5>
+        <a href="{% url 'groups_add' %}" class="btn btn-primary">Add a Group</a>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+
 
 {% endblock %}
