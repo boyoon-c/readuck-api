@@ -40,6 +40,7 @@ At **readuck**, researchers can discuss acadmic journal articles to produce/deve
 - Django
 - Python
 - PostgreSQL
+- Amazon S3
 - Bootstrap
 - CSS, HTML, Javascript
 - Figma, Lottie
