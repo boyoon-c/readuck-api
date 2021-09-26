@@ -1,7 +1,7 @@
 # readuck
 
 ## Description 
-test
+
 **readuck** is a place where researchers across the world get together and share their thoughts. 
 
 At **readuck**, researchers can discuss acadmic journal articles to produce/develop/improve and refine their papers so that their products could be more useful to the society. 
