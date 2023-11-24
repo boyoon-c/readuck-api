@@ -27,7 +27,7 @@ At **readuck**, researchers can discuss acadmic journal articles to produce/deve
 ![](main_app/static/images/screenshots/group_index.png)
 - Group Details Page
 ![](main_app/static/images/screenshots/group_detail.png)
-- Profie Page
+- Profile Page
 ![](main_app/static/images/screenshots/profile.png)
 
 
